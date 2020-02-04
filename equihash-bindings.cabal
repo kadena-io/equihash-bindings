@@ -1,0 +1,37 @@
+cabal-version:       >=1.10
+name:                equihash-bindings
+version:             0.1.0.0
+synopsis: Haskell bindings to Equihash reference implementation
+license:             BSD3
+license-file:        LICENSE
+copyright:           Kadena, LLC
+build-type:          Simple
+extra-source-files:  CHANGELOG.md
+
+common warning-flags
+    ghc-options:
+        -Wall
+        -Werror
+        -Wcompat
+        -Wpartial-fields
+        -Wincomplete-record-updates
+        -Wincomplete-uni-patterns
+        -Widentities
+
+        -- This needed because -Werror and missing-home-modules causes
+        -- problems with ghci.
+        -Wno-missing-home-modules
+library
+  import: warning-flags
+  exposed-modules:
+    Crypto.Hash.Equihash
+  other-modules:
+    Crypto.Hash.Equihash.Bindings
+
+  build-depends:       base >=4.12 && <4.13,
+                       bytestring,
+                       vector
+  hs-source-dirs:      src
+  default-language:    Haskell2010
+  c-sources: cbits/cbits.cc
+  include-dirs: cbits

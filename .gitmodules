@@ -1,0 +1,3 @@
+[submodule "equihash"]
+	path = equihash
+	url = git@github.com:khovratovich/equihash.git
